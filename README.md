@@ -1,6 +1,6 @@
 # Hagematech Calculator
 
-A modern scientific calculator Web Component with gradient themes, custom colors, memory functions, keyboard support, and a built-in bilingual Guide Book.
+A beautiful, responsive, scientific calculator Web Component with physical calculator style, custom gradients, custom hex colors, memory functions, keyboard support, and a built-in bilingual Guide Book.
 
 Use it with one simple HTML tag:
 
@@ -12,52 +12,17 @@ Use it with one simple HTML tag:
 
 ## Preview
 
+### Default Aurora
+
 <p align="center">
   <img 
     src="docs/images/calculator-hagematech-aurora.png" 
-    alt="Hagematech Calculator Preview" 
+    alt="Hagematech Calculator Aurora" 
     width="320"
   />
 </p>
 
-```html
-<calculator-hagematech></calculator-hagematech>
-```
-
----
-
-## Features
-
-- Scientific calculator Web Component
-- Simple custom HTML tag
-- Works with npm, CDN, plain HTML, React, Vue, Laravel, Next.js, Vite, and Astro
-- Shadow DOM style isolation
-- Responsive layout
-- Gradient themes and custom hex colors
-- Light and dark mode
-- DEG/RAD angle mode
-- Memory functions
-- Keyboard support
-- Built-in English and Indonesian Guide Book
-- Powered by math.js
-
----
-
-## Installation
-
-### npm
-
-```bash
-npm install calculator-hagematech
-```
-
-Import it once in your JavaScript entry file:
-
-```js
-import 'calculator-hagematech';
-```
-
-Use the component:
+Copy and paste:
 
 ```html
 <calculator-hagematech></calculator-hagematech>
@@ -65,66 +30,35 @@ Use the component:
 
 ---
 
-## CDN Usage
+### Ocean Gradient
 
-Use this if you do not want to install the package.
+<p align="center">
+  <img 
+    src="docs/images/calculator-hagematech-ocean.png" 
+    alt="Hagematech Calculator Aurora" 
+    width="320"
+  />
+</p>
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0"></script>
-
-<calculator-hagematech></calculator-hagematech>
-```
-
-For production, use a fixed version like `@1.0.0` to keep behavior stable.
-
----
-
-## Basic Usage
-
-```html
-<calculator-hagematech></calculator-hagematech>
-```
-
-With gradient:
+Copy and paste:
 
 ```html
 <calculator-hagematech gradient="ocean"></calculator-hagematech>
 ```
 
-With custom color:
-
-```html
-<calculator-hagematech color="#0ea5e9"></calculator-hagematech>
-```
-
-With dark mode:
-
-```html
-<calculator-hagematech theme="dark"></calculator-hagematech>
-```
-
-With light mode:
-
-```html
-<calculator-hagematech theme="light"></calculator-hagematech>
-```
-
 ---
 
-## Gradient Themes
+### Forest Gradient
 
-Available themes:
+<p align="center">
+  <img 
+    src="docs/images/calculator-hagematech-forest.png" 
+    alt="Hagematech Calculator Aurora" 
+    width="320"
+  />
+</p>
 
-```txt
-aurora
-sunset
-ocean
-forest
-grape
-gold
-```
-
-Example:
+Copy and paste:
 
 ```html
 <calculator-hagematech gradient="forest"></calculator-hagematech>
@@ -132,92 +66,245 @@ Example:
 
 ---
 
-## Custom Hex Color
+### Custom Hex Color
 
-You can use your own color.
+<p align="center">
+  <img 
+    src="docs/images/calculator-hagematech-custom-color.png" 
+    alt="Hagematech Calculator" 
+    width="320"
+  />
+</p>
+
+Copy and paste:
 
 ```html
 <calculator-hagematech color="#0ea5e9"></calculator-hagematech>
 ```
 
-When the `color` attribute is used, the calculator automatically generates a matching gradient style.
+---
+
+### Built-in Guide Book
+
+![Hagematech Calculator Guide Book](docs/images/calculator-hagematech-guide-book.png)
+
+The calculator includes a built-in bilingual Guide Book in English and Indonesian.
 
 ---
 
-## Attributes
+## Features
 
-| Attribute | Type | Default | Description |
-|---|---|---|---|
-| `gradient` | string | `aurora` | Selects a built-in gradient theme |
-| `color` | hex color | empty | Generates a custom style from a hex color |
-| `theme` | string | `dark` | Sets theme mode: `dark` or `light` |
-| `angle-mode` | string | `DEG` | Sets trigonometry mode: `DEG` or `RAD` |
-| `precision` | number | `16` | Controls displayed result precision |
-| `max-length` | number | `300` | Maximum allowed expression length |
+- Scientific calculator Web Component
+- Simple custom HTML tag
+- Works with npm, CDN, plain HTML, React, Vue, Laravel, Next.js, Vite, Astro, and more
+- Shadow DOM style isolation
+- Physical calculator-style design
+- Responsive mobile-friendly layout
+- Professional loading state
+- Professional error state
+- Built-in bilingual Guide Book
+- English and Indonesian usage guide
+- Custom gradient themes
+- Custom hexadecimal color support
+- Light and dark mode
+- DEG/RAD angle mode
+- Memory functions
+- Keyboard support
+- Basic arithmetic operations
+- Scientific operations
+- Powered by math.js
 
-Example:
+---
 
-```html
-<calculator-hagematech
-  gradient="ocean"
-  theme="dark"
-  angle-mode="DEG"
-  precision="16"
-  max-length="300"
-></calculator-hagematech>
+## Installation
+
+There are two main ways to use Hagematech Calculator:
+
+1. Install with npm
+2. Use directly from CDN
+
+---
+
+# 1. Install with npm
+
+```bash
+npm install calculator-hagematech
+```
+
+Using yarn:
+
+```bash
+yarn add calculator-hagematech
+```
+
+Using pnpm:
+
+```bash
+pnpm add calculator-hagematech
 ```
 
 ---
 
-## Usage in Frameworks
+## Basic npm Usage
 
-### React
-
-```jsx
-import 'calculator-hagematech';
-
-export default function App() {
-  return (
-    <calculator-hagematech gradient="ocean"></calculator-hagematech>
-  );
-}
-```
-
-### Next.js
-
-Because this package uses a browser custom element, import it on the client side.
-
-```jsx
-'use client';
-
-import { useEffect } from 'react';
-
-export default function Calculator() {
-  useEffect(() => {
-    import('calculator-hagematech');
-  }, []);
-
-  return (
-    <calculator-hagematech gradient="aurora"></calculator-hagematech>
-  );
-}
-```
-
-### Vue
+Import the package once in your JavaScript entry file:
 
 ```js
 import 'calculator-hagematech';
 ```
 
+Then use the tag anywhere in your HTML/template:
+
+```html
+<calculator-hagematech></calculator-hagematech>
+```
+
+---
+
+## Vite Usage
+
+### `main.js`
+
+```js
+import 'calculator-hagematech';
+```
+
+### `index.html`
+
+```html
+<calculator-hagematech></calculator-hagematech>
+```
+
+Example with gradient:
+
+```html
+<calculator-hagematech gradient="ocean"></calculator-hagematech>
+```
+
+---
+
+## React Usage
+
+Install:
+
+```bash
+npm install calculator-hagematech
+```
+
+Import it once:
+
+```jsx
+import 'calculator-hagematech';
+
+export default function App() {
+    return (
+        <div>
+            <h1>Hagematech Calculator Demo</h1>
+
+            <calculator-hagematech></calculator-hagematech>
+        </div>
+    );
+}
+```
+
+Example with custom attributes:
+
+```jsx
+import 'calculator-hagematech';
+
+export default function App() {
+    return (
+        <calculator-hagematech
+            gradient="sunset"
+            theme="dark"
+            angle-mode="DEG"
+            precision="16"
+        ></calculator-hagematech>
+    );
+}
+```
+
+---
+
+## React TypeScript Support
+
+If TypeScript shows an error for the custom element, create:
+
+```txt
+src/custom-elements.d.ts
+```
+
+Then add:
+
+```ts
+import React from 'react';
+
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            'calculator-hagematech': React.DetailedHTMLProps<
+                React.HTMLAttributes<HTMLElement>,
+                HTMLElement
+            > & {
+                gradient?: string;
+                color?: string;
+                theme?: string;
+                'angle-mode'?: string;
+                precision?: string;
+                'max-length'?: string;
+            };
+        }
+    }
+}
+
+export {};
+```
+
+---
+
+## Vue Usage
+
+### `main.js`
+
+```js
+import 'calculator-hagematech';
+```
+
+### Component
+
 ```vue
 <template>
-  <calculator-hagematech gradient="forest"></calculator-hagematech>
+    <calculator-hagematech gradient="forest"></calculator-hagematech>
 </template>
 ```
 
-### Laravel + Vite
+If Vue shows a warning about custom elements, configure it as a custom element.
 
-Import in `resources/js/app.js`:
+### Vite + Vue Config
+
+```js
+export default {
+    compilerOptions: {
+        isCustomElement: (tag) => tag === 'calculator-hagematech'
+    }
+}
+```
+
+---
+
+## Laravel + Vite Usage
+
+Install:
+
+```bash
+npm install calculator-hagematech
+```
+
+Import in:
+
+```txt
+resources/js/app.js
+```
 
 ```js
 import 'calculator-hagematech';
@@ -226,10 +313,42 @@ import 'calculator-hagematech';
 Use in Blade:
 
 ```blade
-<calculator-hagematech gradient="ocean"></calculator-hagematech>
+<calculator-hagematech></calculator-hagematech>
 ```
 
-### Astro
+With custom style:
+
+```blade
+<calculator-hagematech gradient="ocean" theme="dark"></calculator-hagematech>
+```
+
+---
+
+## Next.js Usage
+
+Because this package registers a browser custom element, import it on the client side.
+
+```jsx
+'use client';
+
+import { useEffect } from 'react';
+
+export default function Calculator() {
+    useEffect(() => {
+        import('calculator-hagematech');
+    }, []);
+
+    return (
+        <calculator-hagematech gradient="aurora"></calculator-hagematech>
+    );
+}
+```
+
+---
+
+## Astro Usage
+
+Import the package in your page or layout:
 
 ```astro
 ---
@@ -241,262 +360,11 @@ import 'calculator-hagematech';
 
 ---
 
-## React TypeScript Support
+# 2. CDN Usage
 
-If TypeScript does not recognize the custom element, create this file:
+You can use the package directly from CDN without installing anything.
 
-```txt
-src/custom-elements.d.ts
-```
-
-Add:
-
-```ts
-import React from 'react';
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'calculator-hagematech': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>,
-        HTMLElement
-      > & {
-        gradient?: string;
-        color?: string;
-        theme?: string;
-        'angle-mode'?: string;
-        precision?: string;
-        'max-length'?: string;
-      };
-    }
-  }
-}
-
-export {};
-```
-
----
-
-## Supported Operations
-
-### Basic
-
-| Operation | Button |
-|---|---|
-| Addition | `+` |
-| Subtraction | `−` |
-| Multiplication | `×` |
-| Division | `÷` |
-| Percent | `%` |
-| Equals | `=` |
-| Clear all | `AC` |
-| Clear entry | `CE` |
-| Backspace | `⌫` |
-| Toggle sign | `±` |
-
-### Scientific
-
-| Function | Button |
-|---|---|
-| Sine | `sin` |
-| Cosine | `cos` |
-| Tangent | `tan` |
-| Arc sine | `asin` |
-| Arc cosine | `acos` |
-| Arc tangent | `atan` |
-| Log base 10 | `log` |
-| Natural logarithm | `ln` |
-| Square root | `√` |
-| Cube root | `∛` |
-| Square | `x²` |
-| Power | `xʸ` |
-| Inverse | `1/x` |
-| Factorial | `x!` |
-| Modulo | `mod` |
-
-### Constants
-
-| Constant | Button |
-|---|---|
-| Pi | `π` |
-| Euler's number | `e` |
-
----
-
-## Memory Functions
-
-| Button | Description |
-|---|---|
-| `MS` | Save current value to memory |
-| `MR` | Recall saved memory value |
-| `M+` | Add current value to memory |
-| `M-` | Subtract current value from memory |
-| `MC` | Clear memory |
-
----
-
-## Keyboard Support
-
-| Key | Action |
-|---|---|
-| `0-9` | Input numbers |
-| `+` | Addition |
-| `-` | Subtraction |
-| `*` | Multiplication |
-| `/` | Division |
-| `.` | Decimal point |
-| `%` | Percent |
-| `Enter` | Calculate |
-| `Backspace` | Delete one character |
-| `Escape` | Clear all or close Guide Book |
-
----
-
-## Guide Book
-
-The calculator includes a built-in bilingual Guide Book in English and Indonesian.
-
-Click the `Guide Book` link at the bottom of the calculator to open it.
-
----
-
-## Calculation Event
-
-The component dispatches a `calculate` event after a successful calculation.
-
-```html
-<calculator-hagematech id="calc"></calculator-hagematech>
-
-<script>
-  document.getElementById('calc').addEventListener('calculate', function (event) {
-    console.log(event.detail.expression);
-    console.log(event.detail.result);
-  });
-</script>
-```
-
-Event detail:
-
-```js
-{
-  expression: "2+2",
-  result: "4"
-}
-```
-
----
-
-## Multiple Calculators
-
-You can use more than one calculator on the same page.
-
-```html
-<calculator-hagematech gradient="aurora"></calculator-hagematech>
-<calculator-hagematech gradient="sunset"></calculator-hagematech>
-<calculator-hagematech color="#0ea5e9"></calculator-hagematech>
-```
-
-Each calculator works independently.
-
----
-
-## Styling
-
-The component uses Shadow DOM, so its internal style will not conflict with your website CSS.
-
-Customize it using attributes:
-
-```html
-<calculator-hagematech gradient="ocean"></calculator-hagematech>
-```
-
-```html
-<calculator-hagematech color="#7c3aed"></calculator-hagematech>
-```
-
----
-
-## Dependency
-
-Hagematech Calculator automatically loads math.js from CDN.
-
-No manual math.js setup is required.
-
----
-
-## Browser Support
-
-Recommended modern browsers:
-
-- Google Chrome
-- Microsoft Edge
-- Mozilla Firefox
-- Safari
-
----
-
-## License
-
-This project is open source with visible Hagematech attribution.
-
-You may use, study, modify, and distribute this project under the selected open source license.
-
-Visible Hagematech branding must remain in the free version.
-
-To remove Hagematech branding, a commercial branding removal license is required.
-
----
-
-## Commercial Branding Removal
-
-The free version includes visible Hagematech attribution.
-
-A commercial license allows you to:
-
-- Remove visible Hagematech branding
-- Use without public attribution
-- Use in client projects
-- Use in commercial dashboards, ERP, POS, admin panels, SaaS, or internal business tools
-- Get optional priority support
-
-Contact:
-
-- Email: your-email@example.com
-- Website: https://yourdomain.com
-
----
-
-## Author
-
-Created by Hagematech.
-
----
-
-## Version
-
-```txt
-1.0.0
-```
-
----
-
-## Quick Copy Paste
-
-### npm
-
-```bash
-npm install calculator-hagematech
-```
-
-```js
-import 'calculator-hagematech';
-```
-
-```html
-<calculator-hagematech></calculator-hagematech>
-```
-
-### CDN
+## jsDelivr CDN
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0"></script>
@@ -504,14 +372,128 @@ import 'calculator-hagematech';
 <calculator-hagematech></calculator-hagematech>
 ```
 
-### Gradient
+## unpkg CDN
+
+```html
+<script src="https://unpkg.com/calculator-hagematech@1.0.0"></script>
+
+<calculator-hagematech></calculator-hagematech>
+```
+
+If your package entry file is inside `dist`, use:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0/dist/calculator-hagematech.js"></script>
+
+<calculator-hagematech></calculator-hagematech>
+```
+
+---
+
+## Full CDN Usage
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hagematech Calculator Demo</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0"></script>
+</head>
+<body>
+
+    <h1>Hagematech Calculator Demo</h1>
+
+    <calculator-hagematech></calculator-hagematech>
+
+</body>
+</html>
+```
+
+---
+## Gradient Themes
+
+Hagematech Calculator includes 6 built-in gradient themes.
+
+| Theme | Usage |
+|---|---|
+| Aurora | `<calculator-hagematech gradient="aurora"></calculator-hagematech>` |
+| Sunset | `<calculator-hagematech gradient="sunset"></calculator-hagematech>` |
+| Ocean | `<calculator-hagematech gradient="ocean"></calculator-hagematech>` |
+| Forest | `<calculator-hagematech gradient="forest"></calculator-hagematech>` |
+| Grape | `<calculator-hagematech gradient="grape"></calculator-hagematech>` |
+| Gold | `<calculator-hagematech gradient="gold"></calculator-hagematech>` |
+
+Example:
 
 ```html
 <calculator-hagematech gradient="ocean"></calculator-hagematech>
 ```
 
-### Custom Color
+---
+
+## Custom Hex Colors
+
+You can also use any valid hex color.
+
+The calculator will automatically generate a matching style from the selected color.
+
+| Color Name | Hex Color | Usage |
+|---|---|---|
+| Sky Blue | `#0ea5e9` | `<calculator-hagematech color="#0ea5e9"></calculator-hagematech>` |
+| Red | `#dc2626` | `<calculator-hagematech color="#dc2626"></calculator-hagematech>` |
+| Green | `#16a34a` | `<calculator-hagematech color="#16a34a"></calculator-hagematech>` |
+| Purple | `#7c3aed` | `<calculator-hagematech color="#7c3aed"></calculator-hagematech>` |
+| Orange | `#ea580c` | `<calculator-hagematech color="#ea580c"></calculator-hagematech>` |
+| Pink | `#db2777` | `<calculator-hagematech color="#db2777"></calculator-hagematech>` |
+| Cyan | `#0891b2` | `<calculator-hagematech color="#0891b2"></calculator-hagematech>` |
+| Emerald | `#059669` | `<calculator-hagematech color="#059669"></calculator-hagematech>` |
+| Amber | `#d97706` | `<calculator-hagematech color="#d97706"></calculator-hagematech>` |
+| Slate | `#475569` | `<calculator-hagematech color="#475569"></calculator-hagematech>` |
+| Indigo | `#4f46e5` | `<calculator-hagematech color="#4f46e5"></calculator-hagematech>` |
+| Rose | `#e11d48` | `<calculator-hagematech color="#e11d48"></calculator-hagematech>` |
+
+Example:
+
+```html
+<calculator-hagematech color="#7c3aed"></calculator-hagematech>
+```
+
+---
+
+## Color Rules
+
+Use a valid 3-digit or 6-digit hex color.
+
+Valid examples:
 
 ```html
 <calculator-hagematech color="#0ea5e9"></calculator-hagematech>
+<calculator-hagematech color="#f00"></calculator-hagematech>
 ```
+
+Invalid examples:
+
+```html
+<calculator-hagematech color="blue"></calculator-hagematech>
+<calculator-hagematech color="rgb(14, 165, 233)"></calculator-hagematech>
+```
+
+---
+
+## Gradient vs Custom Color
+
+Use `gradient` if you want one of the built-in themes.
+
+```html
+<calculator-hagematech gradient="forest"></calculator-hagematech>
+```
+
+Use `color` if you want your own custom color.
+
+```html
+<calculator-hagematech color="#16a34a"></calculator-hagematech>
+```
+
+If `color` is provided, the calculator will use the custom color style.
