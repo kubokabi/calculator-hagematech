@@ -1,205 +1,1156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Hagematech Calculator - Scientific Calculator Web Component</title>
+    <title>Hagematech Calculator - Premium Scientific Calculator Web Component</title>
 
-  <meta
-    name="description"
-    content="Hagematech Calculator is a modern scientific calculator Web Component with gradient themes, custom hex colors, memory functions, keyboard support, and bilingual guide book."
-  />
+    <meta name="description"
+        content="Hagematech Calculator is a premium scientific calculator Web Component with gradient themes, custom hex colors, memory functions, keyboard support, Shadow DOM isolation, and bilingual guide book." />
 
-  <meta
-    name="keywords"
-    content="calculator, scientific calculator, web component, custom element, javascript calculator, html calculator, mathjs, shadow dom, hagematech"
-  />
+    <meta name="keywords"
+        content="calculator, scientific calculator, web component, custom element, javascript calculator, html calculator, mathjs, shadow dom, hagematech" />
 
-  <link rel="canonical" href="https://kubokabi.github.io/calculator-hagematech/" />
+    <link rel="canonical" href="https://kubokabi.github.io/calculator-hagematech/" />
 
-  <meta property="og:title" content="Hagematech Calculator" />
-  <meta
-    property="og:description"
-    content="A modern scientific calculator Web Component with gradients, custom colors, memory functions, and keyboard support."
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kubokabi.github.io/calculator-hagematech/" />
+    <meta property="og:title" content="Hagematech Calculator" />
+    <meta property="og:description"
+        content="A premium scientific calculator Web Component with gradients, custom colors, memory functions, and keyboard support." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kubokabi.github.io/calculator-hagematech/" />
 
-  <script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0"></script>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 32px;
-      background: #f1f5f9;
-      font-family: Arial, sans-serif;
-      color: #0f172a;
-    }
+    <style>
+        :root {
+            --bg: #020617;
+            --panel: rgba(15, 23, 42, 0.72);
+            --panel-soft: rgba(15, 23, 42, 0.48);
+            --border: rgba(148, 163, 184, 0.18);
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --muted-2: #64748b;
+            --brand: #22d3ee;
+            --brand-2: #a78bfa;
+            --brand-3: #38bdf8;
+            --white: #ffffff;
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --shadow: 0 32px 90px rgba(0, 0, 0, 0.42);
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .hero {
-      margin-bottom: 32px;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .hero h1 {
-      margin: 0 0 12px;
-      font-size: 40px;
-      line-height: 1.1;
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 12% 8%, rgba(34, 211, 238, 0.22), transparent 30%),
+                radial-gradient(circle at 88% 12%, rgba(167, 139, 250, 0.22), transparent 28%),
+                radial-gradient(circle at 50% 90%, rgba(14, 165, 233, 0.12), transparent 36%),
+                linear-gradient(180deg, #020617 0%, #0f172a 52%, #020617 100%);
+            color: var(--text);
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            overflow-x: hidden;
+        }
 
-    .hero p {
-      max-width: 720px;
-      margin: 0 0 20px;
-      font-size: 18px;
-      line-height: 1.6;
-      color: #475569;
-    }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 72%);
+        }
 
-    .install-box {
-      display: inline-block;
-      padding: 12px 16px;
-      background: #0f172a;
-      color: #ffffff;
-      border-radius: 12px;
-      font-family: monospace;
-    }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    h2 {
-      margin-top: 40px;
-      margin-bottom: 16px;
-    }
+        .page {
+            position: relative;
+            z-index: 1;
+        }
 
-    .demo-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      align-items: flex-start;
-    }
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
 
-    .demo-card {
-      padding: 16px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-    }
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(18px);
+            background: rgba(2, 6, 23, 0.76);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+        }
 
-    .demo-card h3 {
-      margin: 0 0 12px;
-      color: #334155;
-      font-size: 16px;
-    }
+        .nav-inner {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+            position: relative;
+        }
 
-    pre {
-      overflow-x: auto;
-      padding: 16px;
-      background: #0f172a;
-      color: #e2e8f0;
-      border-radius: 12px;
-    }
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            flex: 0 0 auto;
+        }
 
-    a {
-      color: #2563eb;
-      font-weight: 700;
-    }
-  </style>
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.95), transparent 18%),
+                linear-gradient(135deg, #67e8f9, #a78bfa);
+            color: #020617;
+            box-shadow: 0 14px 40px rgba(34, 211, 238, 0.28);
+            font-size: 20px;
+            font-weight: 1000;
+        }
+
+        .logo-text {
+            display: grid;
+            gap: 3px;
+            min-width: 0;
+        }
+
+        .logo-title {
+            font-size: 16px;
+            line-height: 1;
+            font-weight: 950;
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+        }
+
+        .logo-subtitle {
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .nav-link {
+            padding: 10px 14px;
+            border-radius: 999px;
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: 800;
+            transition: 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-cta {
+            padding: 11px 16px;
+            border-radius: 999px;
+            color: #020617;
+            background: linear-gradient(135deg, #67e8f9, #a78bfa);
+            font-size: 13px;
+            font-weight: 900;
+            box-shadow: 0 14px 34px rgba(34, 211, 238, 0.18);
+            white-space: nowrap;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .nav-button {
+            display: none;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 auto;
+            cursor: pointer;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(15, 23, 42, 0.8);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav-button span {
+            width: 19px;
+            height: 2px;
+            border-radius: 999px;
+            background: #e2e8f0;
+            transition: 0.2s ease;
+        }
+
+        @media (max-width: 860px) {
+            .nav-inner {
+                min-height: 68px;
+            }
+
+            .nav-button {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 12px);
+                left: 0;
+                right: 0;
+                display: grid;
+                gap: 8px;
+                padding: 14px;
+                border: 1px solid rgba(148, 163, 184, 0.16);
+                border-radius: 22px;
+                background:
+                    radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.12), transparent 34%),
+                    rgba(2, 6, 23, 0.96);
+                box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+                backdrop-filter: blur(20px);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-8px);
+                pointer-events: none;
+                transition: 0.2s ease;
+            }
+
+            .nav-link,
+            .nav-cta {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 46px;
+            }
+
+            .nav-link {
+                border-radius: 14px;
+                background: rgba(255, 255, 255, 0.04);
+            }
+
+            .nav-cta {
+                border-radius: 14px;
+            }
+
+            .nav-toggle:checked~.nav-links {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .nav-toggle:checked~.nav-button span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+
+            .nav-toggle:checked~.nav-button span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle:checked~.nav-button span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-inner {
+                gap: 12px;
+            }
+
+            .logo-mark {
+                width: 40px;
+                height: 40px;
+                border-radius: 14px;
+                font-size: 18px;
+            }
+
+            .logo-title {
+                font-size: 14px;
+            }
+
+            .logo-subtitle {
+                font-size: 9px;
+                letter-spacing: 0.1em;
+            }
+
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                border-radius: 13px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .logo-subtitle {
+                display: none;
+            }
+
+            .logo-title {
+                max-width: 190px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .hero {
+            padding: 82px 0 58px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+            gap: 52px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            width: fit-content;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 20px;
+            padding: 8px 12px;
+            border: 1px solid rgba(34, 211, 238, 0.24);
+            border-radius: 999px;
+            background: rgba(34, 211, 238, 0.08);
+            color: #67e8f9;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 18px rgba(34, 197, 94, 0.9);
+        }
+
+        .hero h1 {
+            margin: 0;
+            max-width: 760px;
+            font-size: clamp(44px, 7vw, 62px);
+            line-height: 0.95;
+            font-weight: 1000;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #ffffff 0%, #67e8f9 42%, #c4b5fd 82%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 650px;
+            margin: 24px 0 0;
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 18px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 900;
+            transition: 0.2s ease;
+        }
+
+        .button-primary {
+            color: #020617;
+            background: linear-gradient(135deg, #67e8f9, #a78bfa);
+            box-shadow: 0 18px 46px rgba(34, 211, 238, 0.24);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 24px 54px rgba(34, 211, 238, 0.32);
+        }
+
+        .button-secondary {
+            color: #e2e8f0;
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            background: rgba(15, 23, 42, 0.64);
+        }
+
+        .button-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.32);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .install-command {
+            margin-top: 28px;
+            width: fit-content;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 8px 8px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(2, 6, 23, 0.72);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            overflow-x: auto;
+        }
+
+        .install-command code {
+            color: #e2e8f0;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .copy-label {
+            flex: 0 0 auto;
+            padding: 9px 11px;
+            border-radius: 12px;
+            background: rgba(34, 211, 238, 0.12);
+            color: #67e8f9;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .hero-preview {
+            position: relative;
+            display: grid;
+            place-items: center;
+        }
+
+        .hero-preview::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.22), rgba(167, 139, 250, 0.18));
+            filter: blur(20px);
+            opacity: 0.9;
+        }
+
+        .premium-frame {
+            position: relative;
+            width: min(100%, 470px);
+            padding: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 38px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
+                rgba(15, 23, 42, 0.64);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(20px);
+        }
+
+        .premium-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(103, 232, 249, 0.65), rgba(167, 139, 250, 0.55), transparent 62%);
+            mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .frame-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+
+        .frame-kicker {
+            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .frame-badge {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(34, 211, 238, 0.12);
+            color: #67e8f9;
+            font-size: 11px;
+            font-weight: 900;
+            border: 1px solid rgba(34, 211, 238, 0.18);
+        }
+
+        .stats {
+            padding: 26px 0 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.48);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 1000;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, #ffffff, #67e8f9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+            font-weight: 700;
+        }
+
+        .section {
+            padding: 62px 0;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 28px;
+            margin-bottom: 26px;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: clamp(30px, 4vw, 48px);
+            line-height: 1;
+            letter-spacing: -0.055em;
+            font-weight: 1000;
+        }
+
+        .section-text {
+            max-width: 520px;
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .usage-card {
+            padding: 24px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: var(--radius-lg);
+            background:
+                radial-gradient(circle at 90% 0%, rgba(34, 211, 238, 0.12), transparent 28%),
+                rgba(15, 23, 42, 0.6);
+            box-shadow: var(--shadow);
+        }
+
+        .code-block {
+            margin: 0;
+            overflow-x: auto;
+            padding: 22px;
+            border-radius: 18px;
+            background: #020617;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            color: #e2e8f0;
+            line-height: 1.7;
+            font-size: 14px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .code-block code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .demo-card {
+            position: relative;
+            padding: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 28px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+                rgba(15, 23, 42, 0.62);
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+            overflow: hidden;
+        }
+
+        .demo-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.14), transparent 28%);
+            pointer-events: none;
+        }
+
+        .demo-card h3 {
+            position: relative;
+            margin: 0 0 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            color: #f8fafc;
+            font-size: 15px;
+            font-weight: 950;
+            letter-spacing: -0.02em;
+        }
+
+        .demo-card h3 span {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .demo-card calculator-hagematech {
+            position: relative;
+            width: 100%;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .feature-card {
+            padding: 22px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.5);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(167, 139, 250, 0.18));
+            color: #67e8f9;
+            font-size: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+        }
+
+        .feature-card h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .links-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px;
+            border-radius: 30px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.16), transparent 28%),
+                radial-gradient(circle at 90% 20%, rgba(167, 139, 250, 0.16), transparent 26%),
+                rgba(15, 23, 42, 0.68);
+            box-shadow: var(--shadow);
+        }
+
+        .links-panel h2 {
+            margin: 0;
+            font-size: 26px;
+            letter-spacing: -0.04em;
+        }
+
+        .links-panel p {
+            margin: 8px 0 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .footer {
+            padding: 42px 0 56px;
+            border-top: 1px solid rgba(148, 163, 184, 0.12);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .powered {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: rgba(15, 23, 42, 0.52);
+            color: #cbd5e1;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .powered strong {
+            color: #ffffff;
+        }
+
+        .powered-mark {
+            width: 26px;
+            height: 26px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #67e8f9, #a78bfa);
+            color: #020617;
+            font-weight: 1000;
+        }
+
+        .footer-note {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--muted-2);
+        }
+
+        @media (max-width: 1100px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-preview {
+                justify-content: start;
+            }
+
+            .demo-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                width: min(100% - 28px, 1180px);
+            }
+
+            .nav-inner {
+                min-height: auto;
+                padding: 16px 0;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 4px;
+            }
+
+            .hero {
+                padding: 52px 0 40px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .install-command {
+                width: 100%;
+            }
+
+            .section {
+                padding: 46px 0;
+            }
+
+            .section-head {
+                display: block;
+            }
+
+            .demo-grid,
+            .features-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .links-panel {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .premium-frame {
+                padding: 12px;
+                border-radius: 28px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <div class="page">
+        <header class="nav">
+            <div class="container nav-inner">
+                <a href="#" class="logo" aria-label="Hagematech Calculator">
+                    <span class="logo-mark">H</span>
+                    <span class="logo-text">
+                        <span class="logo-title">Hagematech Calculator</span>
+                        <span class="logo-subtitle">Web Component</span>
+                    </span>
+                </a>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Hagematech Calculator</h1>
-      <p>
-        A modern scientific calculator Web Component with gradient themes,
-        custom hex colors, memory functions, keyboard support, and bilingual Guide Book.
-      </p>
+                <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
 
-      <div class="install-box">npm install calculator-hagematech</div>
-    </section>
+                <label for="nav-toggle" class="nav-button" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
 
-    <h2>Basic Usage</h2>
+                <nav class="nav-links" aria-label="Main navigation">
+                    <a class="nav-link" href="#usage">Usage</a>
+                    <a class="nav-link" href="#gradients">Gradients</a>
+                    <a class="nav-link" href="#colors">Colors</a>
+                    <a class="nav-link" href="#features">Features</a>
+                    <a class="nav-cta" href="https://www.npmjs.com/package/calculator-hagematech">npm Package</a>
+                </nav>
+            </div>
+        </header>
 
-    <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0"&gt;&lt;/script&gt;
+        <main>
+            <section class="hero">
+                <div class="container hero-grid">
+                    <div>
+                        <div class="eyebrow">
+                            <span class="eyebrow-dot"></span>
+                            Premium Scientific Calculator Library
+                        </div>
+
+                        <h1>
+                            Build a modern calculator with
+                            <span>one HTML tag.</span>
+                        </h1>
+
+                        <p class="hero-description">
+                            Hagematech Calculator is a premium scientific calculator Web Component
+                            with gradient themes, custom hex colors, keyboard support, memory functions,
+                            Shadow DOM isolation, and a built-in bilingual Guide Book.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a class="button button-primary" href="#usage">Get Started</a>
+                            <a class="button button-secondary"
+                                href="https://github.com/kubokabi/calculator-hagematech">View GitHub</a>
+                            <a class="button button-secondary"
+                                href="https://www.npmjs.com/package/calculator-hagematech">View npm</a>
+                        </div>
+
+                        <div class="install-command">
+                            <code>npm install calculator-hagematech</code>
+                            <span class="copy-label">COPY</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-preview">
+                        <div class="premium-frame">
+                            <div class="frame-header">
+                                <span class="frame-kicker">Live Component</span>
+                                <span class="frame-badge">v1.0.0</span>
+                            </div>
+
+                            <calculator-hagematech gradient="aurora"></calculator-hagematech>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats">
+                <div class="container stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">1 Tag</div>
+                        <div class="stat-label">Use the calculator with a simple custom HTML element.</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">6 Themes</div>
+                        <div class="stat-label">Built-in gradient themes for different dashboard styles.</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">Hex</div>
+                        <div class="stat-label">Generate a custom look from your own hex color.</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">Shadow</div>
+                        <div class="stat-label">Style isolation with Shadow DOM support.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="usage" class="section">
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <h2 class="section-title">Simple installation.</h2>
+                            <p class="section-text">
+                                Install from npm or load directly from CDN. After that, use the custom element anywhere
+                                in your HTML.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="usage-card">
+                        <pre class="code-block"><code>&lt;script src="https://cdn.jsdelivr.net/npm/calculator-hagematech@1.0.0"&gt;&lt;/script&gt;
 
 &lt;calculator-hagematech&gt;&lt;/calculator-hagematech&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
 
-    <h2>Default Calculator</h2>
+            <section id="gradients" class="section">
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <h2 class="section-title">Gradient themes.</h2>
+                            <p class="section-text">
+                                Choose from built-in premium gradient styles for your website, admin panel, POS,
+                                dashboard, or SaaS interface.
+                            </p>
+                        </div>
+                    </div>
 
-    <div class="demo-card">
-      <calculator-hagematech></calculator-hagematech>
+                    <div class="demo-grid">
+                        <div class="demo-card">
+                            <h3>Aurora <span>Default</span></h3>
+                            <calculator-hagematech gradient="aurora"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Sunset <span>Warm</span></h3>
+                            <calculator-hagematech gradient="sunset"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Ocean <span>Blue</span></h3>
+                            <calculator-hagematech gradient="ocean"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Forest <span>Green</span></h3>
+                            <calculator-hagematech gradient="forest"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Grape <span>Purple</span></h3>
+                            <calculator-hagematech gradient="grape"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Gold <span>Luxury</span></h3>
+                            <calculator-hagematech gradient="gold"></calculator-hagematech>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="colors" class="section">
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <h2 class="section-title">Custom hex colors.</h2>
+                            <p class="section-text">
+                                Use your own brand color. The component automatically generates a matching premium
+                                calculator style.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="demo-grid">
+                        <div class="demo-card">
+                            <h3>Sky Blue <span>#0ea5e9</span></h3>
+                            <calculator-hagematech color="#0ea5e9"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Red <span>#dc2626</span></h3>
+                            <calculator-hagematech color="#dc2626"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Green <span>#16a34a</span></h3>
+                            <calculator-hagematech color="#16a34a"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Purple <span>#7c3aed</span></h3>
+                            <calculator-hagematech color="#7c3aed"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Orange <span>#ea580c</span></h3>
+                            <calculator-hagematech color="#ea580c"></calculator-hagematech>
+                        </div>
+
+                        <div class="demo-card">
+                            <h3>Pink <span>#db2777</span></h3>
+                            <calculator-hagematech color="#db2777"></calculator-hagematech>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="section">
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <h2 class="section-title">Built for real products.</h2>
+                            <p class="section-text">
+                                Designed to be simple for developers, clean for users, and flexible for modern web
+                                interfaces.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">⌨</div>
+                            <h3>Keyboard Support</h3>
+                            <p>Users can calculate faster with number keys, operators, Enter, Backspace, and Escape.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">◈</div>
+                            <h3>Shadow DOM</h3>
+                            <p>Internal styles are isolated, so the calculator will not conflict with your website CSS.
+                            </p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">ƒ</div>
+                            <h3>Scientific Functions</h3>
+                            <p>Supports basic arithmetic, trigonometry, roots, powers, logarithms, constants, and memory
+                                functions.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🌐</div>
+                            <h3>Bilingual Guide</h3>
+                            <p>Includes a built-in Guide Book in English and Indonesian for easy user onboarding.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="links-panel">
+                        <div>
+                            <h2>Ready to install?</h2>
+                            <p>Use it from npm, CDN, GitHub Pages, Laravel, React, Vue, Next.js, Vite, Astro, and plain
+                                HTML.</p>
+                        </div>
+
+                        <div class="hero-actions">
+                            <a class="button button-primary"
+                                href="https://www.npmjs.com/package/calculator-hagematech">Open npm</a>
+                            <a class="button button-secondary"
+                                href="https://github.com/kubokabi/calculator-hagematech">Open GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="powered">
+                    <span class="powered-mark">H</span>
+                    <span>Powered by <strong>Hagematech</strong></span>
+                </div>
+
+                <div class="footer-note">
+                    Premium scientific calculator Web Component for modern web applications.
+                </div>
+            </div>
+        </footer>
     </div>
-
-    <h2>Gradient Themes</h2>
-
-    <div class="demo-grid">
-      <div class="demo-card">
-        <h3>Aurora</h3>
-        <calculator-hagematech gradient="aurora"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Sunset</h3>
-        <calculator-hagematech gradient="sunset"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Ocean</h3>
-        <calculator-hagematech gradient="ocean"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Forest</h3>
-        <calculator-hagematech gradient="forest"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Grape</h3>
-        <calculator-hagematech gradient="grape"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Gold</h3>
-        <calculator-hagematech gradient="gold"></calculator-hagematech>
-      </div>
-    </div>
-
-    <h2>Custom Hex Colors</h2>
-
-    <div class="demo-grid">
-      <div class="demo-card">
-        <h3>Sky Blue</h3>
-        <calculator-hagematech color="#0ea5e9"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Red</h3>
-        <calculator-hagematech color="#dc2626"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Green</h3>
-        <calculator-hagematech color="#16a34a"></calculator-hagematech>
-      </div>
-
-      <div class="demo-card">
-        <h3>Purple</h3>
-        <calculator-hagematech color="#7c3aed"></calculator-hagematech>
-      </div>
-    </div>
-
-    <h2>Links</h2>
-
-    <p>
-      <a href="https://www.npmjs.com/package/calculator-hagematech">View on npm</a>
-      ·
-      <a href="https://github.com/kubokabi/calculator-hagematech">View on GitHub</a>
-    </p>
-  </main>
-
 </body>
+
 </html>
