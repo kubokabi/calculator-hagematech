@@ -14,7 +14,13 @@ Use it with one simple HTML tag:
 
 ### Default Aurora
 
-![Hagematech Calculator Aurora](docs/images/hagematech-calc-aurora.png)
+<p align="center">
+  <img 
+    src="docs/images/hagematech-calc-aurora.png" 
+    alt="Hagematech Calculator Aurora" 
+    width="320"
+  />
+</p>
 
 Copy and paste:
 
