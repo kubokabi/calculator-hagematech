@@ -765,7 +765,7 @@ Recommended `package.json`:
 ```json
 {
   "name": "hagematech-calc",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "A modern scientific calculator Web Component with gradients, memory functions, keyboard support, and bilingual guide book.",
   "main": "hagematech-calc.js",
   "unpkg": "hagematech-calc.js",
@@ -798,7 +798,7 @@ If your source file is inside `dist`, use:
 ```json
 {
   "name": "hagematech-calc",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "A modern scientific calculator Web Component with gradients, memory functions, keyboard support, and bilingual guide book.",
   "main": "dist/hagematech-calc.js",
   "unpkg": "dist/hagematech-calc.js",
@@ -909,7 +909,7 @@ Created by Hagematech.
 Current version:
 
 ```txt
-1.0.1
+1.0.0
 ```
 
 ---
